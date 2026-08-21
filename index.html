@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaypi — Portfolio</title>
+  <meta name="description"
+    content="Portfolio of John Paul C. Laurio (Jaypi) — BS Information Technology student at Batangas State University. Building things one line of code at a time.">
+  <meta name="author" content="John Paul C. Laurio">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Jaypi — Portfolio">
+  <meta property="og:description"
+    content="Portfolio of John Paul C. Laurio (Jaypi) — BS Information Technology student at Batangas State University.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="me.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23171717'/><text x='50' y='68' font-size='52' font-weight='600' font-family='system-ui' fill='white' text-anchor='middle'>J</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Set the theme BEFORE the page paints (avoids a flash of the wrong theme) -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      // No saved preference → dark (the primary theme)
+      if (saved === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    })();
+  </script>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container">
+      <a href="#" class="nav-brand">Jaypi</a>
+      <ul class="nav-links">
+        <li><a href="#about"><span class="nav-text">About</span></a></li>
+        <li><a href="#education"><span class="nav-text">Education</span></a></li>
+        <li><a href="#skills"><span class="nav-text">Skills</span></a></li>
+        <li><a href="#contact"><span class="nav-text">Contact</span></a></li>
+        <li>
+          <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">
+            <!-- Sun: shown in dark mode (click to go light) -->
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+            <!-- Moon: shown in light mode (click to go dark) -->
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-name">John Paul<br>C. Laurio</h1>
+          <p class="hero-role">BS Information Technology — Batangas State University</p>
+          <p class="hero-tagline">I build things with code. Currently a 2nd-year student figuring it out one commit at a time.</p>
+          <div class="hero-actions">
+            <a href="mailto:johnpaullaurio0295@gmail.com" class="hero-cta">
+              Get in touch
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+            <a href="https://github.com/Jaypicntrlio" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--ghost">
+              GitHub
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="hero-photo-wrapper">
+          <span class="photo-fallback">JP</span>
+          <img src="me.jpg" alt="Jaypi" class="hero-photo" width="160" height="160">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="container">
+      <div class="section-label">About</div>
+      <p class="about-text">
+        I'm Jaypi, an IT student who loves coding and building random app ideas.
+        Currently in my second year at Batangas State University — Alangilan Campus,
+        figuring things out one commit at a time. This portfolio is part of that journey.
+      </p>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Name</div>
+          <div class="value">John Paul C. Laurio</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Nickname</div>
+          <div class="value">Jaypi</div>
+        </div>
+        <div class="info-item">
+          <div class="label">School</div>
+          <div class="value">Batangas State University</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Course</div>
+          <div class="value">BS Information Technology · 2nd Year</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Location</div>
+          <div class="value">Alangilan, Batangas City</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Email</div>
+          <div class="value"><a href="mailto:johnpaullaurio0295@gmail.com">johnpaullaurio0295@gmail.com</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- EDUCATION -->
+  <section id="education" class="reveal">
+    <div class="container">
+      <div class="section-label">Education</div>
+
+      <div class="timeline">
+        <div class="timeline-entry">
+          <div class="timeline-year">2024 — Present</div>
+          <div class="timeline-title">Bachelor of Science in Information Technology</div>
+          <div class="timeline-school">Batangas State University — Alangilan Campus</div>
+        </div>
+        <div class="timeline-entry">
+          <div class="timeline-year">2022 — 2024</div>
+          <div class="timeline-title">Bachelor of Science in Information System</div>
+          <div class="timeline-school">Governor Mariano E. Villafuerte Community College — Tinambac Campus</div>
+        </div>
+        <div class="timeline-entry">
+          <div class="timeline-year">2020 — 2022</div>
+          <div class="timeline-title">Senior High School — TVL</div>
+          <div class="timeline-school">Don Servillano Platon Memorial National High School</div>
+          <div class="timeline-detail">Electrical Installation and Maintenance</div>
+        </div>
+        <div class="timeline-entry">
+          <div class="timeline-year">2016 — 2019</div>
+          <div class="timeline-title">Junior High School</div>
+          <div class="timeline-school">Don Servillano Platon Memorial National High School — Sta. Cruz, Tinambac</div>
+        </div>
+        <div class="timeline-entry">
+          <div class="timeline-year">2010 — 2015</div>
+          <div class="timeline-title">Elementary</div>
+          <div class="timeline-school">Tinambac South Central School II — Tinambac, Camarines Sur</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SKILLS -->
+  <section id="skills" class="reveal">
+    <div class="container">
+      <div class="section-label">Skills</div>
+
+      <div class="skills-list">
+        <div class="skill-tag">
+          <span class="skill-dot"></span>
+          HTML
+          <span class="skill-level">· Beginner</span>
+        </div>
+        <div class="skill-tag">
+          <span class="skill-dot"></span>
+          CSS
+          <span class="skill-level">· Beginner</span>
+        </div>
+        <div class="skill-tag">
+          <span class="skill-dot"></span>
+          C++
+          <span class="skill-level">· Beginner</span>
+        </div>
+        <div class="skill-tag intermediate">
+          <span class="skill-dot"></span>
+          Python
+          <span class="skill-level">· Intermediate</span>
+        </div>
+        <div class="skill-tag">
+          <span class="skill-dot"></span>
+          PHP
+          <span class="skill-level">· Beginner</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PROJECTS -->
+  <section id="projects" class="reveal">
+    <div class="container">
+      <div class="section-label">Projects</div>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="23 7 16 12 23 17 23 7" />
+                <rect width="15" height="14" x="1" y="5" rx="2" />
+              </svg>
+            </div>
+            <span class="project-badge">Freelance</span>
+          </div>
+          <div class="project-title">Video Editor — CapCut</div>
+          <p class="project-desc">Freelance video editing using CapCut. Cutting, transitions, effects, and color grading
+            for short-form and long-form content.</p>
+          <div class="project-tags">
+            <span class="project-tag">CapCut</span>
+            <span class="project-tag">Editing</span>
+            <span class="project-tag">Freelance</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                <path d="M3 6h18" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+            </div>
+            <div class="project-links"></div>
+          </div>
+          <div class="project-title">Inventory Management System</div>
+          <p class="project-desc">A Python-based system to track and manage items, quantities, and inventory data.</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section id="contact" class="reveal">
+    <div class="container">
+      <div class="section-label">Contact</div>
+
+      <div class="contact-links">
+        <button type="button" class="contact-link" id="copyEmail" aria-label="Copy email address">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+          </div>
+          <div class="contact-info">
+            <div class="label">Email</div>
+            <div class="value">johnpaullaurio0295@gmail.com</div>
+          </div>
+          <svg class="contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="14" height="14" x="8" y="8" rx="2" />
+            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+          </svg>
+        </button>
+
+        <a href="https://github.com/Jaypicntrlio" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
+          <div class="contact-info">
+            <div class="label">GitHub</div>
+            <div class="value">@Jaypicntrlio</div>
+          </div>
+          <svg class="contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+
+        <a href="https://www.instagram.com/jaypi_100?igsh=MXczaDJxNGNyODB0OQ==" target="_blank"
+          rel="noopener noreferrer" class="contact-link">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          </div>
+          <div class="contact-info">
+            <div class="label">Instagram</div>
+            <div class="value">@jaypi_100</div>
+          </div>
+          <svg class="contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+
+        <a href="https://www.facebook.com/share/1ExfnQ6hpa/" target="_blank" rel="noopener noreferrer"
+          class="contact-link">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </div>
+          <div class="contact-info">
+            <div class="label">Facebook</div>
+            <div class="value">John Paul C. Laurio</div>
+          </div>
+          <svg class="contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      © 2026 John Paul C. Laurio
+    </div>
+  </footer>
+
+
+  <!-- Toast -->
+  <div class="copy-toast" id="copyToast">Email copied to clipboard</div>
+
+  <!-- SCRIPTS -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
