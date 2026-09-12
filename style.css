@@ -243,28 +243,31 @@
        HERO
        ============================================ */
     .hero {
-      padding-top: 128px;
-      padding-bottom: 48px;
+      padding-top: 140px;
+      padding-bottom: 64px;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
     }
 
     .hero-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 40px;
+      gap: 48px;
     }
 
     .hero-text {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
       flex: 1;
       min-width: 0;
     }
 
     .hero-photo {
-      width: 140px;
-      height: 140px;
+      width: 160px;
+      height: 160px;
       border-radius: 9999px;
       object-fit: cover;
       box-shadow: var(--shadow-subtle);
@@ -275,8 +278,8 @@
     /* Fallback when image fails to load */
     .hero-photo-wrapper {
       position: relative;
-      width: 140px;
-      height: 140px;
+      width: 160px;
+      height: 160px;
       border-radius: 9999px;
       flex-shrink: 0;
       background: var(--tag-bg);
@@ -288,7 +291,7 @@
     }
 
     .hero-photo-wrapper .photo-fallback {
-      font-size: 48px;
+      font-size: 52px;
       font-weight: 600;
       color: var(--text-placeholder);
       letter-spacing: -1px;
@@ -309,19 +312,39 @@
       display: none;
     }
 
+    /* Hover swap: default photo fades out, hover photo fades in with a slight zoom */
+    .hero-photo-wrapper .hero-photo--default,
+    .hero-photo-wrapper .hero-photo--hover {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .hero-photo-wrapper .hero-photo--hover {
+      opacity: 0;
+    }
+
+    .hero-photo-wrapper:hover .hero-photo--default {
+      opacity: 0;
+    }
+
+    .hero-photo-wrapper:hover .hero-photo--hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
     .hero-name {
-      font-size: clamp(36px, 7vw, 48px);
+      font-size: clamp(44px, 8vw, 72px);
       font-weight: 600;
-      letter-spacing: -2.4px;
-      line-height: 1.0;
+      letter-spacing: -3.2px;
+      line-height: 0.95;
       color: var(--text-primary);
     }
 
     .hero-role {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 400;
       color: var(--text-secondary);
       line-height: 1.5;
+      letter-spacing: -0.1px;
     }
 
     .hero-tagline {
@@ -329,29 +352,46 @@
       font-weight: 400;
       color: var(--text-muted);
       line-height: 1.6;
-      max-width: 520px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
     }
 
     .hero-cta {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 8px;
-      padding: 8px 16px;
-      border-radius: 6px;
+      padding: 10px 20px;
+      border-radius: 8px;
       font-size: 14px;
       font-weight: 500;
       background: var(--text-primary);
       color: var(--bg);
       text-decoration: none;
       transition: opacity 0.15s ease, transform 0.15s ease;
-      width: fit-content;
     }
 
     .hero-cta:hover {
       opacity: 0.85;
       color: var(--bg);
       transform: translateY(-1px);
+    }
+
+    .hero-cta--ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .hero-cta--ghost:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+      background: var(--surface-hover);
     }
 
     .hero-cta:focus-visible {
@@ -735,6 +775,98 @@
     }
 
     /* ============================================
+       INTRO ANIMATION — plays on every load
+       ============================================ */
+    /* Full-screen overlay: letters rise in, underline sweeps, then the
+       whole overlay wipes upward to reveal the page (2.2s delay + 0.8s wipe).
+       Runs from CSS alone, so it also works without JavaScript. */
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      will-change: transform;
+      animation: intro-exit 0.8s cubic-bezier(0.76, 0, 0.24, 1) 2.2s forwards;
+    }
+
+    @keyframes intro-exit {
+      0%   { transform: translateY(0);       visibility: visible; }
+      99%  { transform: translateY(-100%);   visibility: visible; }
+      100% { transform: translateY(-100%);   visibility: hidden; }
+    }
+
+    .intro-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .intro-name {
+      display: flex;
+      font-size: clamp(56px, 12vw, 110px);
+      font-weight: 600;
+      letter-spacing: -4px;
+      line-height: 1;
+      color: var(--text-primary);
+      overflow: hidden;
+    }
+
+    /* Letters rise out of a mask, staggered left to right */
+    .intro-letter {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(110%);
+      animation: intro-letter-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: calc(0.08s * var(--i));
+    }
+
+    @keyframes intro-letter-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Underline sweeps left → right after the name lands */
+    .intro-underline {
+      width: 100%;
+      height: 3px;
+      background: var(--text-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: intro-line 0.6s ease 0.7s forwards;
+    }
+
+    @keyframes intro-line {
+      to { transform: scaleX(1); }
+    }
+
+    /* Subtitle fades in below */
+    .intro-sub {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: intro-sub-in 0.5s ease 1.15s forwards;
+    }
+
+    @keyframes intro-sub-in {
+      to { opacity: 1; }
+    }
+
+    /* Lock scrolling while the intro plays (removed by JS afterwards) */
+    body.intro-active {
+      overflow: hidden;
+    }
+
+    /* ============================================
        RESPONSIVE
        ============================================ */
     @media (max-width: 600px) {
@@ -743,19 +875,24 @@
       }
 
       .hero {
-        padding-top: 96px;
+        padding-top: 100px;
         padding-bottom: 32px;
+        min-height: auto;
       }
 
       .hero-content {
         flex-direction: column-reverse;
         align-items: center;
         text-align: center;
-        gap: 24px;
+        gap: 32px;
       }
 
       .hero-name {
-        letter-spacing: -1.6px;
+        letter-spacing: -2px;
+      }
+
+      .hero-actions {
+        justify-content: center;
       }
 
       .hero-cta {
@@ -806,9 +943,9 @@
     }
 
     .hero-text > *:nth-child(1) { animation-delay: 0.0s; }
-    .hero-text > *:nth-child(2) { animation-delay: 0.06s; }
-    .hero-text > *:nth-child(3) { animation-delay: 0.12s; }
-    .hero-text > *:nth-child(4) { animation-delay: 0.18s; }
+    .hero-text > *:nth-child(2) { animation-delay: 0.08s; }
+    .hero-text > *:nth-child(3) { animation-delay: 0.16s; }
+    .hero-text > *:nth-child(4) { animation-delay: 0.24s; }
 
     /* ============================================
        SCROLL REVEAL — sections below hero
@@ -832,5 +969,9 @@
         opacity: 1;
         transform: none;
         transition: none;
+      }
+      /* Skip the intro entirely for reduced-motion users */
+      .intro {
+        display: none;
       }
     }

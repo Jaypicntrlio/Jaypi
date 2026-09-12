@@ -1,4 +1,21 @@
-// --- Theme Toggle ---
+    // --- Intro Animation cleanup ---
+    (function () {
+      var intro = document.getElementById('intro');
+      if (!intro) return;
+      // Reduced-motion users never see the intro (CSS hides it) — nothing to clean up
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var body = document.body;
+      body.classList.add('intro-active'); // lock scroll while the intro plays
+
+      // The wipe finishes at ~3.0s (2.2s delay + 0.8s); remove the overlay after that
+      setTimeout(function () {
+        intro.remove();
+        body.classList.remove('intro-active');
+      }, 3300);
+    })();
+
+    // --- Theme Toggle ---
     (function () {
       var toggleBtn = document.getElementById('themeToggle');
       var html = document.documentElement;
@@ -40,11 +57,12 @@
 
     // --- Photo Fallback ---
     (function () {
-      var img = document.querySelector('.hero-photo');
-      if (!img) return;
-      img.onerror = function () {
-        img.setAttribute('data-failed', 'true');
-      };
+      var imgs = document.querySelectorAll('.hero-photo');
+      imgs.forEach(function (img) {
+        img.onerror = function () {
+          img.setAttribute('data-failed', 'true');
+        };
+      });
     })();
 
     // --- Copy Email ---
