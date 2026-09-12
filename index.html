@@ -44,6 +44,21 @@
 
 <body>
 
+  <!-- INTRO ANIMATION (plays on every load, then wipes up to reveal the site) -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-inner">
+      <div class="intro-name">
+        <span class="intro-letter" style="--i:0">J</span>
+        <span class="intro-letter" style="--i:1">a</span>
+        <span class="intro-letter" style="--i:2">y</span>
+        <span class="intro-letter" style="--i:3">p</span>
+        <span class="intro-letter" style="--i:4">i</span>
+      </div>
+      <span class="intro-underline"></span>
+      <p class="intro-sub">Portfolio</p>
+    </div>
+  </div>
+
   <!-- NAVIGATION -->
   <nav>
     <div class="container">
@@ -109,7 +124,8 @@
         </div>
         <div class="hero-photo-wrapper">
           <span class="photo-fallback">JP</span>
-          <img src="me.jpg" alt="Jaypi" class="hero-photo" width="160" height="160">
+          <img src="me.jpg" alt="Jaypi" class="hero-photo hero-photo--default" width="160" height="160">
+          <img src="me-hover.jpg" alt="" class="hero-photo hero-photo--hover" width="160" height="160">
         </div>
       </div>
     </div>
