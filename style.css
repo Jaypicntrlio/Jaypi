@@ -784,6 +784,7 @@
       position: fixed;
       inset: 0;
       z-index: 999;
+      overflow: hidden;
       background: var(--bg);
       display: flex;
       align-items: center;
@@ -867,6 +868,162 @@
     }
 
     /* ============================================
+       INTRO — hanging mascots
+       Six flat silhouettes hang upside-down from silk strands along the top
+       edge. Every mascot runs the same beat, so the row moves as one system;
+       --t staggers them so they drop in as a cascade and never sway in
+       lockstep:
+         0.00s + --t  silk reels down, the figure rides it
+         0.50s + --t  sway + limb wobble, looping
+         2.20s        the intro wipe carries the whole row off screen
+       ============================================ */
+    .intro-mascots {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 16px;
+    }
+
+    .mascot {
+      flex: 0 0 auto;
+      width: 84px;
+      color: var(--text-primary);
+      /* Pivots at the silk's anchor on the top edge, not the middle of the figure */
+      transform-origin: 50% 0;
+      animation: swing-sway 1.2s ease-in-out infinite;
+      animation-delay: calc(0.5s + var(--t, 0s));
+    }
+
+    .mascot .swing {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Silk strand reels down and the figure drops in with it. Same easing and
+       duration, so the feet stay glued to the strand's tip on the way down. */
+    .sf-web {
+      transform-box: fill-box;
+      transform-origin: 50% 0%;
+      animation: sf-web-drop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: var(--t, 0s);
+    }
+
+    @keyframes sf-web-drop {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+
+    .sf-rig {
+      animation: sf-rig-drop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: var(--t, 0s);
+    }
+
+    @keyframes sf-rig-drop {
+      from { transform: translateY(-70px); opacity: 0; }
+      to   { transform: translateY(0);      opacity: 1; }
+    }
+
+    @keyframes swing-sway {
+      0%, 100% { transform: rotate(-3.5deg); }
+      50%      { transform: rotate(3.5deg); }
+    }
+
+    /* Second, faster pendulum: the body swings from the feet on top of the
+       strand's sway. The mismatched periods are what stop the two rotations
+       from locking into a single rigid motion.
+       The origin is pinned in view-box units rather than fill-box percentages:
+       fill-box centres on the SHAPE, so an off-centre silhouette (Among Us's
+       backpack, Mario's cap brim) would pull the pivot off the strand and make
+       the figure swing around an axis that isn't the silk. Every mascot hangs
+       at (50, 70) in its own viewBox, so one origin is exact for all of them. */
+    .sf-body {
+      transform-box: view-box;
+      transform-origin: 50px 70px;
+      animation: sf-pendulum 0.85s ease-in-out infinite;
+      animation-delay: calc(0.5s + var(--t, 0s));
+    }
+
+    @keyframes sf-pendulum {
+      0%, 100% { transform: rotate(-4deg); }
+      50%      { transform: rotate(4deg); }
+    }
+
+    /* Limbs pivot at the top of their own bbox. For every mascot that is the
+       joint the limb actually hangs from — feet for legs, shoulders for arms —
+       so no hand-computed origins are needed and nothing ever detaches. */
+    .sf-limb {
+      transform-box: fill-box;
+      transform-origin: 50% 0%;
+    }
+
+    .sf-limb--a {
+      animation: sf-wobble-a 0.6s ease-in-out infinite;
+      animation-delay: calc(0.5s + var(--t, 0s));
+    }
+
+    .sf-limb--b {
+      animation: sf-wobble-b 0.62s ease-in-out infinite;
+      animation-delay: calc(0.3s + var(--t, 0s));
+    }
+
+    /* Limbs only ever swing OUTWARD (never past 0), so paired limbs can never
+       cross over each other, and --b is phase-offset so the pair doesn't read
+       as a mirrored jumping-jack. */
+    @keyframes sf-wobble-a {
+      0%, 100% { transform: rotate(0deg); }
+      50%      { transform: rotate(7deg); }
+    }
+
+    @keyframes sf-wobble-b {
+      0%, 100% { transform: rotate(0deg); }
+      50%      { transform: rotate(-7deg); }
+    }
+
+    /* ---------- per-mascot palette ----------
+       Each mascot sets --c1..--c5 in its own inline style, so a single colour
+       map drives all six characters; the .m1-.m5 classes just bind a shape to
+       a slot. The shapes keep fill="currentColor" as a fallback, so if this
+       stylesheet ever fails to load the mascots degrade to flat monochrome
+       silhouettes instead of disappearing. */
+    .mascot {
+      --c1: #8a8a8a;
+      --c2: #6a6a6a;
+      --c3: #b0b0b0;
+      --c4: #2b2b2b;
+      --c5: #ffffff;
+      --c6: #e8b93a;
+    }
+
+    /* These set `color`, NOT `fill`, and that distinction is the whole trick:
+       the bodies are drawn two ways — filled shapes (circles, rects) and thick
+       STROKED paths (torsos, limbs, strands) whose fill is "none". Setting
+       `fill` would paint the filled shapes, silently do nothing to every
+       stroked body, and additionally override their fill="none". Driving
+       currentColor instead colours both the fill and the stroke in one go. */
+    .m1 { color: var(--c1); }
+    .m2 { color: var(--c2); }
+    .m3 { color: var(--c3); }
+    .m4 { color: var(--c4); }
+    .m5 { color: var(--c5); }
+    .m6 { color: var(--c6); }
+
+    /* The mascots are full colour now, so they no longer follow the theme. On
+       the light theme the brighter palettes (Pikachu's yellow, Kirby's pink)
+       would wash out against white, so the silhouette gets a soft dark edge
+       there. Against the dark theme it would only muddy the colours, so the
+       outline is scoped to light only. Chaining two drop-shadows compounds the
+       darkening at the edge, which gives a firmer outline than one wider blur. */
+    [data-theme="light"] .mascot .swing {
+      filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 1.5px rgba(0, 0, 0, 0.4));
+    }
+
+    /* ============================================
        RESPONSIVE
        ============================================ */
     @media (max-width: 600px) {
@@ -905,6 +1062,15 @@
 
       .nav-links a {
         font-size: 13px;
+      }
+
+      .intro-mascots {
+        gap: 2px;
+        padding: 0 8px;
+      }
+
+      .mascot {
+        width: 48px;
       }
     }
 

@@ -57,6 +57,199 @@
       <span class="intro-underline"></span>
       <p class="intro-sub">Portfolio</p>
     </div>
+
+    <!-- Loading-screen mascots: six flat silhouettes hanging upside-down from
+         silk strands along the top edge. Each one rides its strand down, then
+         sways and wobbles its limbs until the intro wipes away. The --t value
+         staggers them so they drop in as a cascade and never sway in lockstep.
+         Decorative only. -->
+    <div class="intro-mascots">
+
+      <!-- Spider-Man: red suit, blue legs and arms, white mask eyes -->
+      <div class="mascot" style="--t: 0s; --c1: #d8362e; --c2: #2456a8; --c4: #23202b; --c5: #ffffff">
+        <svg class="swing" viewBox="0 0 100 240" aria-hidden="true" focusable="false">
+          <rect class="sf-web" x="48.75" y="0" width="2.5" height="70" fill="currentColor" />
+          <g class="sf-rig"><g class="sf-body">
+            <g class="sf-limb sf-limb--a">
+              <path class="m2" d="M 45 70 Q 43 94 44 112 Q 45 122 46 130" fill="none" stroke="currentColor"
+                stroke-width="12" stroke-linecap="round" />
+            </g>
+            <g class="sf-limb sf-limb--b">
+              <path class="m2" d="M 55 70 Q 57 94 56 112 Q 55 122 54 130" fill="none" stroke="currentColor"
+                stroke-width="12" stroke-linecap="round" />
+            </g>
+            <!-- Torso, wide enough (32) that the hips stay buried in it when the
+                 legs swing, so the silhouette never shows a seam -->
+            <path class="m1" d="M 50 128 L 50 182" fill="none" stroke="currentColor" stroke-width="32"
+              stroke-linecap="round" />
+            <!-- Chest emblem, so the torso carries the character too -->
+            <path class="m4" fill="currentColor"
+              d="M 46.5 150 Q 46.5 143 50 143 Q 53.5 143 53.5 150 Q 53.5 158 50 158 Q 46.5 158 46.5 150 Z" />
+            <path class="m4" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"
+              d="M 47 146 L 38 140 M 47 154 L 38 160 M 53 146 L 62 140 M 53 154 L 62 160" />
+            <g class="sf-limb sf-limb--a">
+              <path class="m2" d="M 36 182 Q 30 204 32 222" fill="none" stroke="currentColor"
+                stroke-width="11" stroke-linecap="round" />
+            </g>
+            <g class="sf-limb sf-limb--b">
+              <path class="m2" d="M 64 182 Q 73 200 64 212" fill="none" stroke="currentColor"
+                stroke-width="11" stroke-linecap="round" />
+            </g>
+            <circle class="m1" cx="50" cy="208" r="13" fill="currentColor" />
+            <circle class="m5" cx="44" cy="207" r="4.4" fill="currentColor" />
+            <circle class="m5" cx="56" cy="207" r="4.4" fill="currentColor" />
+          </g></g>
+        </svg>
+      </div>
+
+      <!-- Kirby: pink body, red feet, dark eyes -->
+      <div class="mascot" style="--t: .05s; --c1: #ef8fb5; --c2: #cc3d5b; --c3: #e0658a; --c4: #2b2b2b">
+        <svg class="swing" viewBox="0 0 100 195" aria-hidden="true" focusable="false">
+          <rect class="sf-web" x="48.75" y="0" width="2.5" height="70" fill="currentColor" />
+          <g class="sf-rig"><g class="sf-body">
+            <g class="sf-limb sf-limb--a">
+              <path class="m2" d="M 38 78 L 38 112" fill="none" stroke="currentColor" stroke-width="17"
+                stroke-linecap="round" />
+            </g>
+            <g class="sf-limb sf-limb--b">
+              <path class="m2" d="M 62 78 L 62 112" fill="none" stroke="currentColor" stroke-width="17"
+                stroke-linecap="round" />
+            </g>
+            <g class="sf-limb sf-limb--a"><circle class="m1" cx="25" cy="152" r="7" fill="currentColor" /></g>
+            <g class="sf-limb sf-limb--b"><circle class="m1" cx="75" cy="152" r="7" fill="currentColor" /></g>
+            <circle class="m1" cx="50" cy="150" r="30" fill="currentColor" />
+            <circle class="m4" cx="43" cy="156" r="4.2" fill="currentColor" />
+            <circle class="m4" cx="57" cy="156" r="4.2" fill="currentColor" />
+            <circle class="m3" cx="36" cy="166" r="5" fill="currentColor" />
+            <circle class="m3" cx="64" cy="166" r="5" fill="currentColor" />
+          </g></g>
+        </svg>
+      </div>
+
+      <!-- Pikachu: yellow, brown ear tips, red cheeks -->
+      <div class="mascot" style="--t: .1s; --c1: #e8b91f; --c2: #4a3b22; --c3: #d9503f; --c4: #2b2b2b; --c5: #f7e6a0">
+        <svg class="swing" viewBox="0 0 100 245" aria-hidden="true" focusable="false">
+          <rect class="sf-web" x="48.75" y="0" width="2.5" height="70" fill="currentColor" />
+          <g class="sf-rig"><g class="sf-body">
+            <path class="m1" d="M 46 70 L 54 70 L 54 82 L 63 79 L 50 102 L 44 102 L 55 84 L 46 86 Z"
+              fill="currentColor" />
+            <g class="sf-limb sf-limb--a"><circle class="m1" cx="32" cy="112" r="8" fill="currentColor" /></g>
+            <g class="sf-limb sf-limb--b"><circle class="m1" cx="68" cy="112" r="8" fill="currentColor" /></g>
+            <path class="m1" d="M 50 115 L 50 145" fill="none" stroke="currentColor" stroke-width="40"
+              stroke-linecap="round" />
+            <!-- Pale belly patch: without it the whole body is one flat yellow -->
+            <circle class="m5" cx="50" cy="130" r="11" fill="currentColor" />
+            <circle class="m1" cx="50" cy="180" r="24" fill="currentColor" />
+            <circle class="m3" cx="35" cy="190" r="5.5" fill="currentColor" />
+            <circle class="m3" cx="65" cy="190" r="5.5" fill="currentColor" />
+            <circle class="m4" cx="42" cy="183" r="4.5" fill="currentColor" />
+            <circle class="m4" cx="58" cy="183" r="4.5" fill="currentColor" />
+            <g class="sf-limb sf-limb--a">
+              <path class="m1" d="M 34 186 L 28 228 L 39 224 L 45 190 Z" fill="currentColor" />
+              <path class="m2" d="M 30 214 L 28 228 L 39 224 L 41 213 Z" fill="currentColor" />
+            </g>
+            <g class="sf-limb sf-limb--b">
+              <path class="m1" d="M 66 186 L 72 228 L 61 224 L 55 190 Z" fill="currentColor" />
+              <path class="m2" d="M 70 214 L 72 228 L 61 224 L 59 213 Z" fill="currentColor" />
+            </g>
+          </g></g>
+        </svg>
+      </div>
+
+      <!-- Among Us crewmate: red, dark red backpack, light blue visor -->
+      <div class="mascot" style="--t: .15s; --c1: #c51111; --c2: #8f0d0d; --c4: #ffffff; --c5: #9dd7ef">
+        <svg class="swing" viewBox="0 0 100 215" aria-hidden="true" focusable="false">
+          <rect class="sf-web" x="48.75" y="0" width="2.5" height="70" fill="currentColor" />
+          <g class="sf-rig"><g class="sf-body">
+            <g class="sf-limb sf-limb--a">
+              <path class="m1" d="M 42 78 L 42 104" fill="none" stroke="currentColor" stroke-width="16"
+                stroke-linecap="round" />
+            </g>
+            <g class="sf-limb sf-limb--b">
+              <path class="m1" d="M 58 78 L 58 104" fill="none" stroke="currentColor" stroke-width="16"
+                stroke-linecap="round" />
+            </g>
+            <rect class="m2" x="66" y="124" width="14" height="40" rx="7" fill="currentColor" />
+            <rect class="m1" x="30" y="86" width="40" height="118" rx="20" fill="currentColor" />
+            <rect class="m5" x="37" y="150" width="26" height="30" rx="14" fill="currentColor" />
+            <rect class="m4" x="42" y="154" width="10" height="8" rx="4" fill="currentColor" />
+          </g></g>
+        </svg>
+      </div>
+
+      <!-- Mario: red cap, blue overalls, brown shoes, dark mustache -->
+      <div class="mascot" style="--t: .2s; --c1: #d62f22; --c2: #2b4fa8; --c3: #e8a87c; --c4: #43291a; --c5: #6b4423; --c6: #e8b93a">
+        <svg class="swing" viewBox="0 0 100 250" aria-hidden="true" focusable="false">
+          <rect class="sf-web" x="48.75" y="0" width="2.5" height="70" fill="currentColor" />
+          <g class="sf-rig"><g class="sf-body">
+            <g class="sf-limb sf-limb--a">
+              <path class="m5" d="M 39 76 L 39 98" fill="none" stroke="currentColor" stroke-width="15"
+                stroke-linecap="round" />
+            </g>
+            <g class="sf-limb sf-limb--b">
+              <path class="m5" d="M 61 76 L 61 98" fill="none" stroke="currentColor" stroke-width="15"
+                stroke-linecap="round" />
+            </g>
+            <path class="m2" d="M 50 108 L 50 148" fill="none" stroke="currentColor" stroke-width="40"
+              stroke-linecap="round" />
+            <!-- Overall buttons on the body -->
+            <circle class="m6" cx="42" cy="140" r="3.5" fill="currentColor" />
+            <circle class="m6" cx="58" cy="140" r="3.5" fill="currentColor" />
+            <g class="sf-limb sf-limb--a">
+              <path class="m1" d="M 40 150 L 30 186" fill="none" stroke="currentColor" stroke-width="13"
+                stroke-linecap="round" />
+            </g>
+            <g class="sf-limb sf-limb--b">
+              <path class="m1" d="M 60 150 L 70 186" fill="none" stroke="currentColor" stroke-width="13"
+                stroke-linecap="round" />
+            </g>
+            <circle class="m3" cx="50" cy="186" r="20" fill="currentColor" />
+            <circle class="m1" cx="50" cy="214" r="21" fill="currentColor" />
+            <!-- Cap brim -->
+            <path class="m1" d="M 52 216 L 70 216" fill="none" stroke="currentColor" stroke-width="9"
+              stroke-linecap="round" />
+            <!-- Mustache, then eyes below it: the whole figure hangs upside
+                 down, so the face reads low-to-high rather than high-to-low -->
+            <rect class="m4" x="36" y="168" width="28" height="10" rx="5" fill="currentColor" />
+            <circle class="m4" cx="44" cy="188" r="3.3" fill="currentColor" />
+            <circle class="m4" cx="56" cy="188" r="3.3" fill="currentColor" />
+          </g></g>
+        </svg>
+      </div>
+
+      <!-- Totoro: grey fur, cream belly, dark eyes, tall ears down -->
+      <div class="mascot" style="--t: .25s; --c1: #9a9a9a; --c2: #efe6d2; --c4: #3a3a3a">
+        <svg class="swing" viewBox="0 0 100 245" aria-hidden="true" focusable="false">
+          <rect class="sf-web" x="48.75" y="0" width="2.5" height="70" fill="currentColor" />
+          <g class="sf-rig"><g class="sf-body">
+            <g class="sf-limb sf-limb--a">
+              <path class="m1" d="M 40 76 L 40 98" fill="none" stroke="currentColor" stroke-width="16"
+                stroke-linecap="round" />
+            </g>
+            <g class="sf-limb sf-limb--b">
+              <path class="m1" d="M 60 76 L 60 98" fill="none" stroke="currentColor" stroke-width="16"
+                stroke-linecap="round" />
+            </g>
+            <g class="sf-limb sf-limb--a"><circle class="m1" cx="26" cy="140" r="7" fill="currentColor" /></g>
+            <g class="sf-limb sf-limb--b"><circle class="m1" cx="74" cy="140" r="7" fill="currentColor" /></g>
+            <path class="m1" d="M 50 122 L 50 174" fill="none" stroke="currentColor" stroke-width="54"
+              stroke-linecap="round" />
+            <path class="m1" d="M 33 168 L 27 226 L 50 192 Z" fill="currentColor" />
+            <path class="m1" d="M 67 168 L 73 226 L 50 192 Z" fill="currentColor" />
+            <!-- Belly sits between the feet and the face once inverted -->
+            <circle class="m2" cx="50" cy="146" r="17" fill="currentColor" />
+            <!-- Belly chevrons, so the torso isn't just a flat patch -->
+            <path class="m4" d="M 44 132 L 50 137 L 56 132" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path class="m4" d="M 44 156 L 50 161 L 56 156" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <circle class="m4" cx="42" cy="178" r="4" fill="currentColor" />
+            <circle class="m4" cx="58" cy="178" r="4" fill="currentColor" />
+          </g></g>
+        </svg>
+      </div>
+
+    </div>
   </div>
 
   <!-- NAVIGATION -->
