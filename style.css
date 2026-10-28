@@ -154,6 +154,12 @@
       letter-spacing: -0.32px;
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
     .nav-links {
       display: flex;
       gap: 24px;
@@ -195,6 +201,58 @@
     .theme-toggle:focus-visible {
       outline: 2px solid var(--focus);
       outline-offset: 2px;
+    }
+
+    /* Menu button — hidden on desktop, shown on phones (see RESPONSIVE) */
+    .menu-toggle {
+      display: none;
+      position: relative;
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      border-radius: 9999px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      flex-shrink: 0;
+      color: var(--text-primary);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .menu-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .menu-toggle:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Two bars that turn into an X when the menu is open */
+    .menu-bar {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 14px;
+      height: 1.5px;
+      border-radius: 1px;
+      background: currentColor;
+      transition: transform 0.25s ease;
+    }
+
+    .menu-bar:nth-child(1) {
+      transform: translate(-50%, -3px);
+    }
+
+    .menu-bar:nth-child(2) {
+      transform: translate(-50%, 2px);
+    }
+
+    nav.menu-open .menu-bar:nth-child(1) {
+      transform: translate(-50%, -0.5px) rotate(45deg);
+    }
+
+    nav.menu-open .menu-bar:nth-child(2) {
+      transform: translate(-50%, -0.5px) rotate(-45deg);
     }
 
     /* Sun & moon icons sit on top of each other and crossfade */
@@ -310,6 +368,25 @@
 
     .hero-photo-wrapper .hero-photo[data-failed="true"] {
       display: none;
+    }
+
+    /* Hover swap: default photo fades out, hover photo fades in with a slight zoom */
+    .hero-photo-wrapper .hero-photo--default,
+    .hero-photo-wrapper .hero-photo--hover {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .hero-photo-wrapper .hero-photo--hover {
+      opacity: 0;
+    }
+
+    .hero-photo-wrapper:hover .hero-photo--default {
+      opacity: 0;
+    }
+
+    .hero-photo-wrapper:hover .hero-photo--hover {
+      opacity: 1;
+      transform: scale(1.05);
     }
 
     .hero-name {
@@ -602,6 +679,35 @@
       font-feature-settings: "tnum" 1;
     }
 
+    .project-links {
+      display: flex;
+      gap: 6px;
+    }
+
+    .project-link {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s, transform 0.2s ease;
+    }
+
+    .project-link:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+      transform: scale(1.05);
+    }
+
+    .project-link:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
     .project-title {
       font-size: 16px;
       font-weight: 600;
@@ -756,6 +862,255 @@
     }
 
     /* ============================================
+       INTRO ANIMATION — plays on every load
+       ============================================ */
+    /* Full-screen overlay: letters rise in, underline sweeps, then the
+       whole overlay wipes upward to reveal the page (2.2s delay + 0.8s wipe).
+       Runs from CSS alone, so it also works without JavaScript. */
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      overflow: hidden;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      will-change: transform;
+      animation: intro-exit 0.8s cubic-bezier(0.76, 0, 0.24, 1) 2.2s forwards;
+    }
+
+    @keyframes intro-exit {
+      0%   { transform: translateY(0);       visibility: visible; }
+      99%  { transform: translateY(-100%);   visibility: visible; }
+      100% { transform: translateY(-100%);   visibility: hidden; }
+    }
+
+    .intro-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .intro-name {
+      display: flex;
+      font-size: clamp(56px, 12vw, 110px);
+      font-weight: 600;
+      letter-spacing: -4px;
+      line-height: 1;
+      color: var(--text-primary);
+      overflow: hidden;
+    }
+
+    /* Letters rise out of a mask, staggered left to right */
+    .intro-letter {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(110%);
+      animation: intro-letter-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: calc(0.08s * var(--i));
+    }
+
+    @keyframes intro-letter-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Underline sweeps left → right after the name lands */
+    .intro-underline {
+      width: 100%;
+      height: 3px;
+      background: var(--text-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: intro-line 0.6s ease 0.7s forwards;
+    }
+
+    @keyframes intro-line {
+      to { transform: scaleX(1); }
+    }
+
+    /* Subtitle fades in below */
+    .intro-sub {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: intro-sub-in 0.5s ease 1.15s forwards;
+    }
+
+    @keyframes intro-sub-in {
+      to { opacity: 1; }
+    }
+
+    /* Lock scrolling while the intro plays (removed by JS afterwards) */
+    body.intro-active {
+      overflow: hidden;
+    }
+
+    /* ============================================
+       INTRO — hanging mascots
+       Six flat silhouettes hang upside-down from silk strands along the top
+       edge. Every mascot runs the same beat, so the row moves as one system;
+       --t staggers them so they drop in as a cascade and never sway in
+       lockstep:
+         0.00s + --t  silk reels down, the figure rides it
+         0.50s + --t  sway + limb wobble, looping
+         2.20s        the intro wipe carries the whole row off screen
+       ============================================ */
+    .intro-mascots {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 16px;
+    }
+
+    .mascot {
+      flex: 0 0 auto;
+      width: 84px;
+      color: var(--text-primary);
+      /* Pivots at the silk's anchor on the top edge, not the middle of the figure */
+      transform-origin: 50% 0;
+      animation: swing-sway 1.2s ease-in-out infinite;
+      animation-delay: calc(0.5s + var(--t, 0s));
+    }
+
+    .mascot .swing {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Silk strand reels down and the figure drops in with it. Same easing and
+       duration, so the feet stay glued to the strand's tip on the way down. */
+    .sf-web {
+      transform-box: fill-box;
+      transform-origin: 50% 0%;
+      animation: sf-web-drop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: var(--t, 0s);
+    }
+
+    @keyframes sf-web-drop {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+
+    .sf-rig {
+      animation: sf-rig-drop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: var(--t, 0s);
+    }
+
+    @keyframes sf-rig-drop {
+      from { transform: translateY(-70px); opacity: 0; }
+      to   { transform: translateY(0);      opacity: 1; }
+    }
+
+    @keyframes swing-sway {
+      0%, 100% { transform: rotate(-3.5deg); }
+      50%      { transform: rotate(3.5deg); }
+    }
+
+    /* Second, faster pendulum: the body swings from the feet on top of the
+       strand's sway. The mismatched periods are what stop the two rotations
+       from locking into a single rigid motion.
+       The origin is pinned in view-box units rather than fill-box percentages:
+       fill-box centres on the SHAPE, so an off-centre silhouette (Among Us's
+       backpack, Mario's cap brim) would pull the pivot off the strand and make
+       the figure swing around an axis that isn't the silk. Every mascot hangs
+       at (50, 70) in its own viewBox, so one origin is exact for all of them. */
+    .sf-body {
+      transform-box: view-box;
+      transform-origin: 50px 70px;
+      animation: sf-pendulum 0.85s ease-in-out infinite;
+      animation-delay: calc(0.5s + var(--t, 0s));
+    }
+
+    @keyframes sf-pendulum {
+      0%, 100% { transform: rotate(-4deg); }
+      50%      { transform: rotate(4deg); }
+    }
+
+    /* Limbs pivot at the top of their own bbox. For every mascot that is the
+       joint the limb actually hangs from — feet for legs, shoulders for arms —
+       so no hand-computed origins are needed and nothing ever detaches. */
+    .sf-limb {
+      transform-box: fill-box;
+      transform-origin: 50% 0%;
+    }
+
+    .sf-limb--a {
+      animation: sf-wobble-a 0.6s ease-in-out infinite;
+      animation-delay: calc(0.5s + var(--t, 0s));
+    }
+
+    .sf-limb--b {
+      animation: sf-wobble-b 0.62s ease-in-out infinite;
+      animation-delay: calc(0.3s + var(--t, 0s));
+    }
+
+    /* Limbs only ever swing OUTWARD (never past 0), so paired limbs can never
+       cross over each other, and --b is phase-offset so the pair doesn't read
+       as a mirrored jumping-jack. */
+    @keyframes sf-wobble-a {
+      0%, 100% { transform: rotate(0deg); }
+      50%      { transform: rotate(7deg); }
+    }
+
+    @keyframes sf-wobble-b {
+      0%, 100% { transform: rotate(0deg); }
+      50%      { transform: rotate(-7deg); }
+    }
+
+    /* ---------- per-mascot palette ----------
+       Each mascot sets --c1..--c5 in its own inline style, so a single colour
+       map drives all six characters; the .m1-.m5 classes just bind a shape to
+       a slot. The shapes keep fill="currentColor" as a fallback, so if this
+       stylesheet ever fails to load the mascots degrade to flat monochrome
+       silhouettes instead of disappearing. */
+    .mascot {
+      --c1: #8a8a8a;
+      --c2: #6a6a6a;
+      --c3: #b0b0b0;
+      --c4: #2b2b2b;
+      --c5: #ffffff;
+      --c6: #e8b93a;
+    }
+
+    /* These set `color`, NOT `fill`, and that distinction is the whole trick:
+       the bodies are drawn two ways — filled shapes (circles, rects) and thick
+       STROKED paths (torsos, limbs, strands) whose fill is "none". Setting
+       `fill` would paint the filled shapes, silently do nothing to every
+       stroked body, and additionally override their fill="none". Driving
+       currentColor instead colours both the fill and the stroke in one go. */
+    .m1 { color: var(--c1); }
+    .m2 { color: var(--c2); }
+    .m3 { color: var(--c3); }
+    .m4 { color: var(--c4); }
+    .m5 { color: var(--c5); }
+    .m6 { color: var(--c6); }
+
+    /* The mascots are full colour now, so they no longer follow the theme. On
+       the light theme the brighter palettes (Pikachu's yellow, Kirby's pink)
+       would wash out against white, so the silhouette gets a soft dark edge
+       there. Against the dark theme it would only muddy the colours, so the
+       outline is scoped to light only. Chaining two drop-shadows compounds the
+       darkening at the edge, which gives a firmer outline than one wider blur. */
+    [data-theme="light"] .mascot .swing {
+      filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 1.5px rgba(0, 0, 0, 0.4));
+    }
+
+    /* ============================================
        RESPONSIVE
        ============================================ */
     @media (max-width: 600px) {
@@ -788,18 +1143,57 @@
         align-self: center;
       }
 
+      .nav-actions {
+        gap: 8px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      /* Links become a dropdown panel under the nav bar */
       .nav-links {
-        gap: 16px;
+        position: absolute;
+        top: 48px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 16px 12px;
+        background: var(--bg);
+        box-shadow: var(--shadow-border), 0px 8px 16px -8px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+      }
+
+      nav.menu-open .nav-links {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s;
       }
 
       .nav-links a {
-        font-size: 13px;
+        display: block;
+        padding: 12px 8px;
+        font-size: 15px;
+        border-radius: 8px;
       }
-    }
 
-    @media (max-width: 400px) {
-      .nav-links .nav-text {
-        display: none;
+      .nav-links a:hover {
+        background: var(--surface-hover);
+      }
+
+      .intro-mascots {
+        gap: 2px;
+        padding: 0 8px;
+      }
+
+      .mascot {
+        width: 48px;
       }
     }
 
@@ -858,5 +1252,9 @@
         opacity: 1;
         transform: none;
         transition: none;
+      }
+      /* Skip the intro entirely for reduced-motion users */
+      .intro {
+        display: none;
       }
     }
