@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Things I'm Learning — Jaypi</title>
+  <meta name="description"
+    content="Short notes by John Paul C. Laurio (Jaypi) on what I'm learning in web development and IT.">
+  <meta name="author" content="John Paul C. Laurio">
+
+
+  <!-- Favicons: sources are favicon.svg and icons/apple-touch-icon.svg -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- Set the theme BEFORE the page paints (avoids a flash of the wrong theme).
+       Saved choice wins; otherwise follow the visitor's system setting. -->
+  <script>
+    // Lets CSS hide scroll-reveal content only when JS is running
+    document.documentElement.classList.add('js');
+
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) { /* storage blocked */ }
+      var theme = saved === 'light' || saved === 'dark' ? saved
+        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      // Dark is the base theme in style.css, so only light needs the attribute
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    })();
+  </script>
+
+  <!-- Vercel Web Analytics (plain HTML method). The script only exists on Vercel
+       deployments, so it shows a harmless 404 when the site runs locally. -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-brand" aria-label="John Paul Laurio, home"><span class="nav-brand-first">John Paul</span> <span class="nav-brand-last">Laurio</span></a>
+      <div class="nav-actions">
+        <!-- On phones (≤600px) this list becomes a dropdown opened by the menu button -->
+        <ul class="nav-links" id="navLinks">
+          <li><a href="/#about"><span class="nav-text">About</span></a></li>
+          <li><a href="/#education"><span class="nav-text">Education</span></a></li>
+          <li><a href="/#experience"><span class="nav-text">Experience</span></a></li>
+          <li><a href="/#skills"><span class="nav-text">Skills</span></a></li>
+          <li><a href="/#projects"><span class="nav-text">Projects</span></a></li>
+          <li><a href="/learning.html" class="is-active" aria-current="page"><span class="nav-text">Learning</span></a></li>
+          <li><a href="/#contact"><span class="nav-text">Contact</span></a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">
+          <!-- Sun: shown in dark mode (click to go light) -->
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+          <!-- Moon: shown in light mode (click to go dark) -->
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+        </button>
+        <!-- Menu button: only shown on phones -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false"
+          aria-controls="navLinks">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+
+  <main class="learning">
+    <div class="container">
+
+      <!-- LIST VIEW: cards rendered by learning.js from POSTS (posts.js) -->
+      <div id="postList">
+        <h1 class="learning-title">Things I'm Learning</h1>
+        <p class="learning-intro">Short notes on what I'm figuring out, one commit at a time.</p>
+        <div class="post-grid" id="postGrid"></div>
+      </div>
+
+      <!-- POST VIEW: shown for learning.html#post-name -->
+      <article class="post" id="postView" hidden>
+        <a href="/learning.html" class="post-back" id="postBack">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5" />
+            <path d="m12 19-7-7 7-7" />
+          </svg>
+          All notes
+        </a>
+        <div id="postContent"></div>
+      </article>
+
+    </div>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      © 2026 John Paul C. Laurio
+    </div>
+  </footer>
+
+  <!-- Back to top: shown by script.js after scrolling down 400px -->
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m5 12 7-7 7 7" />
+      <path d="M12 19V5" />
+    </svg>
+  </button>
+
+  <!-- SCRIPTS: posts first (data), then the page logic, then the shared site script
+       (theme toggle, phone menu, back-to-top) -->
+  <script src="/posts.js"></script>
+  <script src="/learning.js"></script>
+  <script src="/script.js"></script>
+
+</body>
+
+</html>

@@ -6,40 +6,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jaypi — Portfolio</title>
   <meta name="description"
-    content="Portfolio of John Paul C. Laurio (Jaypi) — BS Information Technology student at Batangas State University. Building things one line of code at a time.">
+    content="Portfolio of John Paul C. Laurio (Jaypi), IT student at Batangas State University and freelance video editor: projects, skills, resume and contact.">
   <meta name="author" content="John Paul C. Laurio">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Jaypi — Portfolio">
   <meta property="og:description"
-    content="Portfolio of John Paul C. Laurio (Jaypi) — BS Information Technology student at Batangas State University.">
+    content="Portfolio of John Paul C. Laurio (Jaypi), IT student at Batangas State University and freelance video editor: projects, skills, resume and contact.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="me.jpg">
+  <meta property="og:image" content="https://jaypi.vercel.app/me.jpg">
+  <meta property="og:url" content="https://jaypi.vercel.app/">
 
-  <!-- Favicon -->
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23171717'/><text x='50' y='68' font-size='52' font-weight='600' font-family='system-ui' fill='white' text-anchor='middle'>J</text></svg>">
+  <!-- Favicons: sources are favicon.svg and icons/apple-touch-icon.svg -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Set the theme BEFORE the page paints (avoids a flash of the wrong theme) -->
+  <!-- Set the theme BEFORE the page paints (avoids a flash of the wrong theme).
+       Saved choice wins; otherwise follow the visitor's system setting. -->
   <script>
+    // Lets CSS hide scroll-reveal content only when JS is running
+    document.documentElement.classList.add('js');
+
     (function () {
-      var saved = localStorage.getItem('theme');
-      // No saved preference → dark (the primary theme)
-      if (saved === 'light') {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) { /* storage blocked */ }
+      var theme = saved === 'light' || saved === 'dark' ? saved
+        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      // Dark is the base theme in style.css, so only light needs the attribute
+      if (theme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
       } else {
         document.documentElement.removeAttribute('data-theme');
       }
     })();
   </script>
+
+  <!-- Vercel Web Analytics (plain HTML method). The script only exists on Vercel
+       deployments, so it shows a harmless 404 when the site runs locally. -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 
 <body>
@@ -255,14 +272,16 @@
   <!-- NAVIGATION -->
   <nav>
     <div class="container">
-      <a href="#" class="nav-brand">Jaypi</a>
+      <a href="#" class="nav-brand" aria-label="John Paul Laurio, home"><span class="nav-brand-first">John Paul</span> <span class="nav-brand-last">Laurio</span></a>
       <div class="nav-actions">
         <!-- On phones (≤600px) this list becomes a dropdown opened by the menu button -->
         <ul class="nav-links" id="navLinks">
           <li><a href="#about"><span class="nav-text">About</span></a></li>
           <li><a href="#education"><span class="nav-text">Education</span></a></li>
+          <li><a href="#experience"><span class="nav-text">Experience</span></a></li>
           <li><a href="#skills"><span class="nav-text">Skills</span></a></li>
           <li><a href="#projects"><span class="nav-text">Projects</span></a></li>
+          <li><a href="learning.html"><span class="nav-text">Learning</span></a></li>
           <li><a href="#contact"><span class="nav-text">Contact</span></a></li>
         </ul>
         <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">
@@ -290,53 +309,112 @@
           aria-controls="navLinks">
           <span class="menu-bar"></span>
           <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
         </button>
       </div>
     </div>
   </nav>
 
 
-  <!-- HERO -->
+  <!-- HERO: two columns (text | portrait), stacks with the text first on smaller screens -->
   <section class="hero" id="hero">
     <div class="container">
-      <div class="hero-content">
+      <div class="hero-grid">
         <div class="hero-text">
-          <h1 class="hero-name">John Paul<br>C. Laurio</h1>
-          <p class="hero-role">BS Information Technology — Batangas State University</p>
-          <p class="hero-tagline">I build things with code. Currently a 2nd-year student figuring it out one commit at a time.</p>
+          <p class="hero-eyebrow">John Paul Laurio <span aria-hidden="true">/</span> IT Student <span aria-hidden="true">/</span> Developer</p>
+          <h1 class="hero-title">Learning to build software, one commit at a time.</h1>
+          <p class="hero-lead">2nd-year BS Information Technology student at Batangas State University. I build with Python,
+            PHP and the web, and I bring creative experience from freelance video editing.</p>
           <div class="hero-actions">
-            <a href="mailto:johnpaullaurio0295@gmail.com" class="hero-cta">
-              Get in touch
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
+            <a href="#projects" class="hero-cta">
+              View my projects
+              <span class="btn-arrow" aria-hidden="true">→</span>
             </a>
-            <a href="https://github.com/Jaypicntrlio" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--ghost">
-              GitHub
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
+            <a href="#contact" class="hero-cta hero-cta--ghost">
+              Start a conversation
+              <span class="btn-arrow" aria-hidden="true">→</span>
             </a>
           </div>
+          <div class="hero-links">
+            <a href="resume.pdf" download class="hero-textlink">
+              Download resume
+              <span class="btn-arrow btn-arrow--down" aria-hidden="true">↓</span>
+            </a>
+            <a href="https://github.com/Jaypicntrlio" target="_blank" rel="noopener noreferrer" class="hero-textlink">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+              GitHub
+            </a>
+          </div>
+          <ul class="hero-facts">
+            <li>BSIT · Batangas State University</li>
+            <li>Philippines · Open to internships</li>
+          </ul>
         </div>
-        <div class="hero-photo-wrapper">
-          <span class="photo-fallback">JP</span>
-          <img src="me.jpg" alt="Jaypi" class="hero-photo hero-photo--default" width="160" height="160">
-          <img src="me-hover.jpg" alt="" class="hero-photo hero-photo--hover" width="160" height="160">
+
+        <!-- Right column: interactive ASCII portrait (script.js, "Hero Portrait") + status card -->
+        <div class="hero-side">
+          <div class="portrait" id="portrait" role="button" tabindex="0" aria-pressed="false"
+            aria-label="Portrait of John Paul Laurio drawn in ones and zeros. Press to reveal the photo.">
+            <!-- The real photo sits on top, hidden; a spotlight mask or the reveal shows it -->
+            <canvas class="portrait-ascii" aria-hidden="true"></canvas>
+            <img class="portrait-photo" src="me.jpg" alt="" width="600" height="600" decoding="async">
+            <p class="portrait-hint" aria-hidden="true">
+              <span class="portrait-hint--pointer">Hover to preview / Click to reveal</span>
+              <span class="portrait-hint--touch">Tap to reveal</span>
+            </p>
+          </div>
+
+          <div class="hero-card">
+            <div class="hero-card-logo" aria-hidden="true">JP</div>
+            <div class="hero-card-body">
+              <p class="hero-card-label">Currently</p>
+              <p class="hero-card-title">BSIT · 2nd Year</p>
+              <p class="hero-card-text">Batangas State University — Alangilan</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
 
+  <!-- STATS STRIP: four quick facts, full width under the hero -->
+  <div class="stats-strip">
+    <div class="container">
+      <ul class="stats" aria-label="Quick facts">
+        <li class="stat">
+          <span class="stat-icon" aria-hidden="true">◇</span>
+          <p class="stat-value">2nd Year</p>
+          <p class="stat-caption">BS Information Technology</p>
+        </li>
+        <li class="stat">
+          <span class="stat-icon" aria-hidden="true">◇</span>
+          <!-- Filled in by script.js from the PROJECTS list, so it stays accurate -->
+          <p class="stat-value" id="statProjects">2+</p>
+          <p class="stat-caption">Projects built</p>
+        </li>
+        <li class="stat">
+          <span class="stat-icon" aria-hidden="true">◇</span>
+          <p class="stat-value">Freelance</p>
+          <p class="stat-caption">Video editing · CapCut</p>
+        </li>
+        <li class="stat">
+          <span class="stat-icon" aria-hidden="true">◇</span>
+          <p class="stat-value">Python</p>
+          <p class="stat-caption">Main language</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
   <!-- ABOUT -->
   <section id="about" class="reveal">
     <div class="container">
-      <div class="section-label">About</div>
+      <p class="section-label">About</p>
+      <h2 class="section-title">A bit about me.</h2>
       <p class="about-text">
         I'm Jaypi, an IT student who loves coding and building random app ideas.
         Currently in my second year at Batangas State University — Alangilan Campus,
@@ -376,7 +454,8 @@
   <!-- EDUCATION -->
   <section id="education" class="reveal">
     <div class="container">
-      <div class="section-label">Education</div>
+      <p class="section-label">Education</p>
+      <h2 class="section-title">Where I've studied.</h2>
 
       <div class="timeline">
         <div class="timeline-entry">
@@ -386,7 +465,7 @@
         </div>
         <div class="timeline-entry">
           <div class="timeline-year">2022 — 2024</div>
-          <div class="timeline-title">Bachelor of Science in Information System</div>
+          <div class="timeline-title">Bachelor of Science in Information Systems</div>
           <div class="timeline-school">Governor Mariano E. Villafuerte Community College — Tinambac Campus</div>
         </div>
         <div class="timeline-entry">
@@ -395,15 +474,34 @@
           <div class="timeline-school">Don Servillano Platon Memorial National High School</div>
           <div class="timeline-detail">Electrical Installation and Maintenance</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="reveal">
+    <div class="container">
+      <p class="section-label">Experience</p>
+      <h2 class="section-title">Work outside the classroom.</h2>
+
+      <div class="timeline">
         <div class="timeline-entry">
-          <div class="timeline-year">2016 — 2019</div>
-          <div class="timeline-title">Junior High School</div>
-          <div class="timeline-school">Don Servillano Platon Memorial National High School — Sta. Cruz, Tinambac</div>
-        </div>
-        <div class="timeline-entry">
-          <div class="timeline-year">2010 — 2015</div>
-          <div class="timeline-title">Elementary</div>
-          <div class="timeline-school">Tinambac South Central School II — Tinambac, Camarines Sur</div>
+          <div class="timeline-year">2024 — Present</div>
+          <div class="timeline-title">Freelance Video Editor</div>
+          <div class="timeline-school">CapCut</div>
+          <ul class="timeline-points">
+            <li>Cutting and pacing for short-form and long-form content</li>
+            <li>Transitions and effects</li>
+            <li>Color grading</li>
+            <li>Videos for small businesses</li>
+          </ul>
+
+          <!-- Filled from SAMPLE_VIDEOS in script.js; stays hidden while that list is empty -->
+          <div class="sample-work" id="sampleWork" hidden>
+            <div class="sample-work-label">Sample work</div>
+            <div class="sample-work-row" id="sampleWorkRow"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -413,34 +511,38 @@
   <!-- SKILLS -->
   <section id="skills" class="reveal">
     <div class="container">
-      <div class="section-label">Skills</div>
+      <p class="section-label">Skills</p>
+      <h2 class="section-title">Tools I build with.</h2>
 
-      <div class="skills-list">
-        <div class="skill-tag">
-          <span class="skill-dot"></span>
-          HTML
-          <span class="skill-level">· Beginner</span>
-        </div>
-        <div class="skill-tag">
-          <span class="skill-dot"></span>
-          CSS
-          <span class="skill-level">· Beginner</span>
-        </div>
-        <div class="skill-tag">
-          <span class="skill-dot"></span>
-          C++
-          <span class="skill-level">· Beginner</span>
-        </div>
-        <div class="skill-tag intermediate">
-          <span class="skill-dot"></span>
-          Python
-          <span class="skill-level">· Intermediate</span>
-        </div>
-        <div class="skill-tag">
-          <span class="skill-dot"></span>
-          PHP
-          <span class="skill-level">· Beginner</span>
-        </div>
+      <!-- Icons: Devicon (devicon.dev) via jsDelivr. CapCut has no Devicon icon, so it uses an inline video icon. -->
+      <div class="skill-group">
+        <h3 class="skill-group-title">Languages</h3>
+        <ul class="skills-list">
+          <li class="skill-badge"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/html5/html5-original.svg" alt="" width="16" height="16" loading="lazy">HTML</li>
+          <li class="skill-badge"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/css3/css3-original.svg" alt="" width="16" height="16" loading="lazy">CSS</li>
+          <li class="skill-badge"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg" alt="" width="16" height="16" loading="lazy">Python</li>
+          <li class="skill-badge"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/php/php-original.svg" alt="" width="16" height="16" loading="lazy">PHP</li>
+          <li class="skill-badge"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/cplusplus/cplusplus-original.svg" alt="" width="16" height="16" loading="lazy">C++</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">Tools</h3>
+        <ul class="skills-list">
+          <li class="skill-badge"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg" alt="" width="16" height="16" loading="lazy">Git</li>
+          <li class="skill-badge"><img class="skill-icon skill-icon--mono" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/github/github-original.svg" alt="" width="16" height="16" loading="lazy">GitHub</li>
+          <li class="skill-badge"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/vscode/vscode-original.svg" alt="" width="16" height="16" loading="lazy">VS Code</li>
+          <li class="skill-badge"><img class="skill-icon skill-icon--mono" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/vercel/vercel-original.svg" alt="" width="16" height="16" loading="lazy">Vercel</li>
+          <li class="skill-badge"><svg class="skill-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /><rect x="2" y="6" width="14" height="12" rx="2" /></svg>CapCut</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3 class="skill-group-title">Currently learning</h3>
+        <ul class="skills-list">
+          <li class="skill-badge"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg" alt="" width="16" height="16" loading="lazy">JavaScript</li>
+          <li class="skill-badge"><img class="skill-icon skill-icon--chip" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/mysql/mysql-original.svg" alt="" width="16" height="16" loading="lazy">MySQL</li>
+          <li class="skill-badge"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/react/react-original.svg" alt="" width="16" height="16" loading="lazy">React</li>
+          <li class="skill-badge"><img class="skill-icon skill-icon--chip" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/java/java-original.svg" alt="" width="16" height="16" loading="lazy">Java</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -448,91 +550,35 @@
 
   <!-- PROJECTS -->
   <section id="projects" class="reveal">
-    <div class="container">
-      <div class="section-label">Projects</div>
+    <div class="container container--wide">
+      <p class="section-label">Projects</p>
+      <h2 class="section-title">Things I've built.</h2>
 
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                <path d="M2 12h20" />
-              </svg>
-            </div>
-            <!-- Live / Code buttons: only add the ones that have a real URL -->
-            <div class="project-links">
-              <a href="https://jaypi.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link"
-                aria-label="Open the live site" title="Live site">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M15 3h6v6" />
-                  <path d="M10 14 21 3" />
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                </svg>
-              </a>
-              <a href="https://github.com/Jaypicntrlio/Jaypi" target="_blank" rel="noopener noreferrer"
-                class="project-link" aria-label="View the code on GitHub" title="Code">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m16 18 6-6-6-6" />
-                  <path d="m8 6-6 6 6 6" />
-                </svg>
-              </a>
-            </div>
+      <!-- Cards are rendered by script.js from the PROJECTS array -->
+      <div class="projects-grid" id="projectsGrid"></div>
+
+      <!-- GITHUB ACTIVITY: contribution chart + latest repos (filled by script.js) -->
+      <div class="gh-activity">
+        <div class="gh-activity-header">
+          <div>
+            <p class="gh-activity-label">GitHub activity</p>
+            <h3 class="gh-activity-title">What I've been pushing.</h3>
           </div>
-          <div class="project-title">Personal Portfolio</div>
-          <p class="project-desc">This site. A single-page portfolio with a light/dark theme, an animated intro and
-            scroll-reveal sections, built with plain HTML, CSS and JavaScript and deployed on Vercel.</p>
-          <div class="project-tags">
-            <span class="project-tag">HTML</span>
-            <span class="project-tag">CSS</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">Vercel</span>
-          </div>
+          <a href="https://github.com/Jaypicntrlio" target="_blank" rel="noopener noreferrer"
+            class="gh-activity-link">@Jaypicntrlio</a>
         </div>
 
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="23 7 16 12 23 17 23 7" />
-                <rect width="15" height="14" x="1" y="5" rx="2" />
-              </svg>
-            </div>
-            <span class="project-badge">Freelance</span>
-          </div>
-          <div class="project-title">Video Editor — CapCut</div>
-          <p class="project-desc">Freelance video editing using CapCut. Cutting, transitions, effects, and color grading
-            for short-form and long-form content.</p>
-          <div class="project-tags">
-            <span class="project-tag">CapCut</span>
-            <span class="project-tag">Editing</span>
-            <span class="project-tag">Freelance</span>
-          </div>
+        <!-- Scrolls sideways on small screens; tabindex lets keyboard users scroll it too -->
+        <div class="gh-chart" tabindex="0" role="region" aria-label="Contribution graph">
+          <img src="https://ghchart.rshah.org/Jaypicntrlio"
+            alt="GitHub contribution graph for Jaypicntrlio over the past year: one square per day, darker green means more contributions."
+            width="663" height="104" loading="lazy" decoding="async">
         </div>
 
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-                <path d="M3 6h18" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
-            </div>
-            <div class="project-links"></div>
-          </div>
-          <div class="project-title">Inventory Management System</div>
-          <p class="project-desc">A Python-based system to track and manage items, quantities, and inventory data.</p>
-          <div class="project-tags">
-            <span class="project-tag">Python</span>
-          </div>
-        </div>
+        <div class="gh-repos-label">Recently updated repositories</div>
+        <ul class="gh-repos" id="ghRepos" aria-live="polite">
+          <li class="gh-repo gh-repo--loading">Loading repositories…</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -541,13 +587,55 @@
   <!-- CONTACT -->
   <section id="contact" class="reveal">
     <div class="container">
-      <div class="section-label">Contact</div>
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Start a conversation.</h2>
+
+      <!-- Contact form (Formspree). The endpoint is FORMSPREE_ENDPOINT at the
+           top of script.js, which sends the form with fetch(). -->
+      <form class="contact-form" id="contactForm" method="POST">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" rows="5" required></textarea>
+        </div>
+
+        <!-- Honeypot: hidden from people, but bots fill it in. Formspree drops
+             any submission where _gotcha has a value. -->
+        <div class="form-honeypot" aria-hidden="true">
+          <label for="cf-gotcha">Leave this field empty</label>
+          <input type="text" id="cf-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+        </div>
+
+        <!-- Email subject in Gmail, and Reply goes to the visitor (_replyto is
+             copied from the email field when the form is sent) -->
+        <input type="hidden" name="_subject" value="New message from jaypi.vercel.app">
+        <input type="hidden" name="_replyto" id="cf-replyto" value="">
+
+        <div class="form-actions">
+          <button type="submit" class="hero-cta form-submit" id="contactSubmit">
+            <span class="form-submit-text">Send message</span>
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </button>
+          <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="contact-alt-label">Or reach me directly</div>
 
       <div class="contact-links">
         <button type="button" class="contact-link" id="copyEmail" aria-label="Copy email address">
           <div class="contact-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect width="20" height="16" x="2" y="4" rx="2" />
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
             </svg>
@@ -557,7 +645,7 @@
             <div class="value">johnpaullaurio0295@gmail.com</div>
           </div>
           <svg class="contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect width="14" height="14" x="8" y="8" rx="2" />
             <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
           </svg>
@@ -565,7 +653,7 @@
 
         <a href="https://github.com/Jaypicntrlio" target="_blank" rel="noopener noreferrer" class="contact-link">
           <div class="contact-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path
                 d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
             </svg>
@@ -575,7 +663,7 @@
             <div class="value">@Jaypicntrlio</div>
           </div>
           <svg class="contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h14" />
             <path d="m12 5 7 7-7 7" />
           </svg>
@@ -585,7 +673,7 @@
           rel="noopener noreferrer" class="contact-link">
           <div class="contact-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -596,7 +684,7 @@
             <div class="value">@jaypi_100</div>
           </div>
           <svg class="contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h14" />
             <path d="m12 5 7 7-7 7" />
           </svg>
@@ -605,7 +693,7 @@
         <a href="https://www.facebook.com/share/1ExfnQ6hpa/" target="_blank" rel="noopener noreferrer"
           class="contact-link">
           <div class="contact-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path
                 d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
             </svg>
@@ -615,7 +703,7 @@
             <div class="value">John Paul C. Laurio</div>
           </div>
           <svg class="contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h14" />
             <path d="m12 5 7 7-7 7" />
           </svg>
@@ -635,6 +723,59 @@
 
   <!-- Toast -->
   <div class="copy-toast" id="copyToast">Email copied to clipboard</div>
+
+  <!-- Back to top: shown by script.js after scrolling down 400px -->
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m5 12 7-7 7 7" />
+      <path d="M12 19V5" />
+    </svg>
+  </button>
+
+  <!-- CHAT WITH AI: floating button + panel (script.js "AI Chat"; server: api/chat.js) -->
+  <button type="button" class="chat-fab" id="chatOpen" aria-expanded="false" aria-controls="chatPanel">
+    <span class="chat-fab-icon" aria-hidden="true">AI<span class="chat-online"></span></span>
+    <span class="chat-fab-text">Chat with AI</span>
+  </button>
+
+  <section class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-labelledby="chatTitle" hidden>
+    <header class="chat-head">
+      <span class="chat-fab-icon" aria-hidden="true">AI<span class="chat-online"></span></span>
+      <div class="chat-head-text">
+        <h2 class="chat-title" id="chatTitle">Ask about John Paul</h2>
+        <p class="chat-sub">AI assistant · answers from this portfolio</p>
+      </div>
+      <button type="button" class="chat-close" id="chatClose" aria-label="Close chat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+    </header>
+
+    <div class="chat-log" id="chatLog" role="log" aria-live="polite">
+      <!-- Keep on one line: messages preserve line breaks -->
+      <p class="chat-msg chat-msg--bot">Hi! I can answer questions about John Paul's studies, skills, projects and experience. What would you like to know?</p>
+    </div>
+
+    <div class="chat-suggest" id="chatSuggest">
+      <button type="button" class="chat-chip">What is he studying?</button>
+      <button type="button" class="chat-chip">What projects has he built?</button>
+      <button type="button" class="chat-chip">How can I contact him?</button>
+    </div>
+
+    <form class="chat-form" id="chatForm">
+      <label for="chatInput" class="visually-hidden">Your question</label>
+      <input type="text" id="chatInput" class="chat-input" maxlength="500" autocomplete="off"
+        placeholder="Ask a question…" required>
+      <button type="submit" class="chat-send" id="chatSend" aria-label="Send">
+        <span aria-hidden="true">→</span>
+      </button>
+    </form>
+    <p class="chat-foot"><span id="chatCount">0</span>/500 · AI can make mistakes</p>
+  </section>
 
   <!-- SCRIPTS -->
   <script src="script.js"></script>
