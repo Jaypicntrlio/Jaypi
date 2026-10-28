@@ -256,34 +256,42 @@
   <nav>
     <div class="container">
       <a href="#" class="nav-brand">Jaypi</a>
-      <ul class="nav-links">
-        <li><a href="#about"><span class="nav-text">About</span></a></li>
-        <li><a href="#education"><span class="nav-text">Education</span></a></li>
-        <li><a href="#skills"><span class="nav-text">Skills</span></a></li>
-        <li><a href="#contact"><span class="nav-text">Contact</span></a></li>
-        <li>
-          <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">
-            <!-- Sun: shown in dark mode (click to go light) -->
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2" />
-              <path d="M12 20v2" />
-              <path d="m4.93 4.93 1.41 1.41" />
-              <path d="m17.66 17.66 1.41 1.41" />
-              <path d="M2 12h2" />
-              <path d="M20 12h2" />
-              <path d="m6.34 17.66-1.41 1.41" />
-              <path d="m19.07 4.93-1.41 1.41" />
-            </svg>
-            <!-- Moon: shown in light mode (click to go dark) -->
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-            </svg>
-          </button>
-        </li>
-      </ul>
+      <div class="nav-actions">
+        <!-- On phones (≤600px) this list becomes a dropdown opened by the menu button -->
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about"><span class="nav-text">About</span></a></li>
+          <li><a href="#education"><span class="nav-text">Education</span></a></li>
+          <li><a href="#skills"><span class="nav-text">Skills</span></a></li>
+          <li><a href="#projects"><span class="nav-text">Projects</span></a></li>
+          <li><a href="#contact"><span class="nav-text">Contact</span></a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">
+          <!-- Sun: shown in dark mode (click to go light) -->
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+          <!-- Moon: shown in light mode (click to go dark) -->
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+        </button>
+        <!-- Menu button: only shown on phones -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false"
+          aria-controls="navLinks">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -444,6 +452,48 @@
       <div class="section-label">Projects</div>
 
       <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                <path d="M2 12h20" />
+              </svg>
+            </div>
+            <!-- Live / Code buttons: only add the ones that have a real URL -->
+            <div class="project-links">
+              <a href="https://jaypi.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link"
+                aria-label="Open the live site" title="Live site">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </a>
+              <a href="https://github.com/Jaypicntrlio/Jaypi" target="_blank" rel="noopener noreferrer"
+                class="project-link" aria-label="View the code on GitHub" title="Code">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m16 18 6-6-6-6" />
+                  <path d="m8 6-6 6 6 6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-title">Personal Portfolio</div>
+          <p class="project-desc">This site. A single-page portfolio with a light/dark theme, an animated intro and
+            scroll-reveal sections, built with plain HTML, CSS and JavaScript and deployed on Vercel.</p>
+          <div class="project-tags">
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">Vercel</span>
+          </div>
+        </div>
+
         <div class="project-card">
           <div class="project-header">
             <div class="project-icon">

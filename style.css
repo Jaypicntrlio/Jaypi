@@ -154,6 +154,12 @@
       letter-spacing: -0.32px;
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
     .nav-links {
       display: flex;
       gap: 24px;
@@ -195,6 +201,58 @@
     .theme-toggle:focus-visible {
       outline: 2px solid var(--focus);
       outline-offset: 2px;
+    }
+
+    /* Menu button — hidden on desktop, shown on phones (see RESPONSIVE) */
+    .menu-toggle {
+      display: none;
+      position: relative;
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      border-radius: 9999px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      flex-shrink: 0;
+      color: var(--text-primary);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .menu-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .menu-toggle:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Two bars that turn into an X when the menu is open */
+    .menu-bar {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 14px;
+      height: 1.5px;
+      border-radius: 1px;
+      background: currentColor;
+      transition: transform 0.25s ease;
+    }
+
+    .menu-bar:nth-child(1) {
+      transform: translate(-50%, -3px);
+    }
+
+    .menu-bar:nth-child(2) {
+      transform: translate(-50%, 2px);
+    }
+
+    nav.menu-open .menu-bar:nth-child(1) {
+      transform: translate(-50%, -0.5px) rotate(45deg);
+    }
+
+    nav.menu-open .menu-bar:nth-child(2) {
+      transform: translate(-50%, -0.5px) rotate(-45deg);
     }
 
     /* Sun & moon icons sit on top of each other and crossfade */
@@ -619,6 +677,35 @@
       border-radius: 9999px;
       background: var(--tag-bg);
       font-feature-settings: "tnum" 1;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 6px;
+    }
+
+    .project-link {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s, transform 0.2s ease;
+    }
+
+    .project-link:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+      transform: scale(1.05);
+    }
+
+    .project-link:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
     }
 
     .project-title {
@@ -1056,12 +1143,48 @@
         align-self: center;
       }
 
+      .nav-actions {
+        gap: 8px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      /* Links become a dropdown panel under the nav bar */
       .nav-links {
-        gap: 16px;
+        position: absolute;
+        top: 48px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 16px 12px;
+        background: var(--bg);
+        box-shadow: var(--shadow-border), 0px 8px 16px -8px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+      }
+
+      nav.menu-open .nav-links {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s;
       }
 
       .nav-links a {
-        font-size: 13px;
+        display: block;
+        padding: 12px 8px;
+        font-size: 15px;
+        border-radius: 8px;
+      }
+
+      .nav-links a:hover {
+        background: var(--surface-hover);
       }
 
       .intro-mascots {
@@ -1071,12 +1194,6 @@
 
       .mascot {
         width: 48px;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .nav-links .nav-text {
-        display: none;
       }
     }
 

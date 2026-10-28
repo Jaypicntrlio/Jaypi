@@ -55,6 +55,47 @@
       });
     })();
 
+    // --- Mobile Menu ---
+    (function () {
+      var nav = document.querySelector('nav');
+      var menuBtn = document.getElementById('menuToggle');
+      var links = document.getElementById('navLinks');
+      if (!nav || !menuBtn || !links) return;
+
+      function setOpen(open) {
+        nav.classList.toggle('menu-open', open);
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+
+      menuBtn.addEventListener('click', function () {
+        setOpen(!nav.classList.contains('menu-open'));
+      });
+
+      // Close after picking a section, so the page scrolls into view uncovered
+      links.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setOpen(false);
+      });
+
+      // Close on Escape, and hand focus back to the menu button
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('menu-open')) {
+          setOpen(false);
+          menuBtn.focus();
+        }
+      });
+
+      // Close when tapping anywhere outside the nav
+      document.addEventListener('click', function (e) {
+        if (!nav.contains(e.target)) setOpen(false);
+      });
+
+      // Close if the window grows back to desktop width
+      window.matchMedia('(min-width: 601px)').addEventListener('change', function (e) {
+        if (e.matches) setOpen(false);
+      });
+    })();
+
     // --- Photo Fallback ---
     (function () {
       var imgs = document.querySelectorAll('.hero-photo');
